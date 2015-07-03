@@ -1,10 +1,14 @@
 package anagram;
 
+
 import java.util.List;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
+
+import core.Game;
+import test.AnagramTest;
 
 /**
  * The Class Demo.
@@ -49,7 +53,7 @@ public class Demo {
 			game.submitScore("catarina", game.calculateScore("semoo","mouse")); // score 15 + 0 = 15
 			game.submitScore("omniata", game.calculateScore("atda","data")); // score 7+4 = 11
 			
-			List<anagram.Entry> list = game.getLeaderBoard("jane");
+			List<core.Entry> list = game.getLeaderBoard("jane");
 			System.out.println("jane");
 			PrintLeaderBoard(list);
 			list = game.getLeaderBoard("catarina");
@@ -86,11 +90,11 @@ public class Demo {
 	 *
 	 * @param list the list
 	 */
-	public static void PrintLeaderBoard(List<anagram.Entry> list){
+	public static void PrintLeaderBoard(List<core.Entry> list){
 		
 		System.out.println("Position\tUID\t\tScore\t");
 		System.out.println("======================================");
-		for(anagram.Entry entry : list){
+		for(core.Entry entry : list){
 			System.out.println(" "+ entry.getPosition() + " \t\t" +entry.getUid()  + "\t\t " + entry.getScore());
 		}
 

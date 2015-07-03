@@ -1,4 +1,4 @@
-package anagram;
+package core;
 
 /**
  * The Class Entry.

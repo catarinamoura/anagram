@@ -1,4 +1,4 @@
-package anagram;
+package core;
 
 import java.io.*;
 import java.lang.*;
@@ -75,9 +75,9 @@ public class Game {
 	 * @param uid the user id 
 	 * @return scopeList the leader board
 	 */
-	public List<anagram.Entry> getLeaderBoard(String uid) {
+	public List<core.Entry> getLeaderBoard(String uid) {
 
-		List<anagram.Entry> scopeList = new ArrayList(); // entries list around the given uid
+		List<core.Entry> scopeList = new ArrayList(); // entries list around the given uid
 		if (!leaderboardMap.containsKey(uid)) { // the uid is not in the map
 			 
 			return scopeList; // return empty list
@@ -148,7 +148,7 @@ public class Game {
 				// position = 1 ; ; // smaller LeaderBoard
 			
 				for (Map.Entry<String, Integer> ent : leaderboardList.subList(startpos, endpos+1)) {
-					scopeList.add(new anagram.Entry(ent.getKey(), ent.getValue(), position));
+					scopeList.add(new core.Entry(ent.getKey(), ent.getValue(), position));
 					position++;
 				}
 			}

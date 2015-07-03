@@ -1,10 +1,13 @@
-package anagram;
+package test;
 
 import static org.junit.Assert.*;
 
 import java.util.List;
 
 import org.junit.Test;
+
+import anagram.Demo;
+import core.Game;
 
 /**
  * The Class AnagramTest.
@@ -66,7 +69,7 @@ public class AnagramTest {
 		if(!demo.getDataBoolean()){
 			demo.generateData();
 		}
-		List<anagram.Entry> list = game.getLeaderBoard("omniata");
+		List<core.Entry> list = game.getLeaderBoard("omniata");
 		assertFalse(list.isEmpty());
 		assertEquals(list.size(),5);
 		assertEquals(list.get(2).getUid(),"omniata");
@@ -80,7 +83,7 @@ public class AnagramTest {
 		if(!demo.getDataBoolean()){
 			demo.generateData();
 		}
-		List<anagram.Entry> list = game.getLeaderBoard("catarina");
+		List<core.Entry> list = game.getLeaderBoard("catarina");
 		//anagram.Entry entry = new anagram.Entry("catarina",15,1);
 		//assertTrue(list.contains(entry));
 		assertFalse(list.isEmpty());
@@ -96,7 +99,7 @@ public class AnagramTest {
 		if(!demo.getDataBoolean()){
 			demo.generateData();
 		}
-		List<anagram.Entry> list = game.getLeaderBoard("john");
+		List<core.Entry> list = game.getLeaderBoard("john");
 		assertFalse(list.isEmpty());
 		assertEquals(list.size(),3);
 		assertEquals(list.get(2).getUid(),"john");
