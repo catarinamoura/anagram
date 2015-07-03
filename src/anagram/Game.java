@@ -7,11 +7,25 @@ import java.util.Map.Entry;
 //import java.util.concurrent.atomic;
 import java.util.concurrent.atomic.AtomicLong;
 
+/**
+ * The Class Game.
+ *  Class that defines the rules and process the Anagram game 
+ */
 public class Game {
 
+	/** The leaderboard map. */
 	private Hashtable<String, Integer> leaderboardMap = new Hashtable<String, Integer>();
 	// private TreeMap leaderboard = new TreeMap();
 
+	/**
+	 * Calculate score.
+	 * Check if the anagram is an anagram word and claculate the score
+	 *
+	 * @param word the word
+	 * @param anagram the anagram
+	 * @return the int
+	 * @throws NullPointerException the null pointer exception
+	 */
 	public int calculateScore(String word, String anagram) throws NullPointerException {
 
 		if (word.equals(null) || anagram.equals(null)) {
@@ -36,6 +50,12 @@ public class Game {
 		return 0; // score 0, not an Anagram
 	}
 
+	/**
+	 * Submit score.
+	 * Associate the user id with score  and submit in a Map
+	 * @param uid the uid
+	 * @param score the score
+	 */
 	public void submitScore(String uid, int score) {
 
 		if (leaderboardMap.containsKey(uid)) {
@@ -49,17 +69,20 @@ public class Game {
 		// System.out.println(uid+": "+ leaderboard.get(uid));
 	}
 
+	/**
+	 * Gets the leader board short version(max 5 entries).
+	 *
+	 * @param uid the user id 
+	 * @return scopeList the leader board
+	 */
 	public List<anagram.Entry> getLeaderBoard(String uid) {
 
-		List<anagram.Entry> scopeList = new ArrayList(); // scope the list for 5
-		// entries around
-		// the given uid
-		if (!leaderboardMap.containsKey(uid)) { // the uid is not in the
-			// leaderboard return empty list
-			return scopeList;
+		List<anagram.Entry> scopeList = new ArrayList(); // entries list around the given uid
+		if (!leaderboardMap.containsKey(uid)) { // the uid is not in the map
+			 
+			return scopeList; // return empty list
 		}
-		// create a list of map entries entry<K,V>, add all the leaderboard
-		// entries and sorted by value
+		// create a list of map entries entry<K,V>, add all the leaderboard entries and sorted by value
 		List<Map.Entry<String, Integer>> leaderboardList = new ArrayList<Map.Entry<String, Integer>>(
 				leaderboardMap.entrySet());
 
@@ -70,21 +93,23 @@ public class Game {
 				return (rightEntry.getValue()).compareTo(leftEntry.getValue());
 			}
 		});
-		
+		// after sort the values, select the entries for the new leadBoard 
 		for (Map.Entry<String, Integer> entry : leaderboardList) {
-			if (entry.getKey().equals(uid)) {
+			if (entry.getKey().equals(uid)) {//uid is in the map
 
 				int index = leaderboardList.indexOf(entry);
 				int size = leaderboardList.size();
-				int startpos;
+				int startpos; 
 				int endpos;
-
+				int position;  // position of uid in the full leader board 
+				
 				if (index == 0 || index == 1 || index == size - 2 || index == size - 1) {
 					// exceptional cases, the uid is in the first, second,
 					// second last or last position
 
 					if (index == 0 || index == 1) { // first, second pos
 						startpos = index;
+						position = 1 ; // full LeaderBoard 
 						if (index + 2 <= size - 1) {// display two entries down
 							endpos = index + 2;
 						} else {
@@ -99,11 +124,14 @@ public class Game {
 						endpos = index;
 						if (index - 2 <= size - 1) {// display two entries up
 							startpos = index - 2;
+							position = leaderboardList.indexOf(entry) - 2 + 1; // full LeaderBoard 
 						} else {
 							if (index - 1 <= size - 1) {// display 1 entry up
 								startpos = index - 1;
+								position = leaderboardList.indexOf(entry) - 1 + 1; // full LeaderBoard
 							} else {// display the entry himself
 								startpos = index;
+								position = leaderboardList.indexOf(entry) + 1; // full LeaderBoard
 							}
 						}
 					}
@@ -113,18 +141,19 @@ public class Game {
 					// bellow to uid
 					startpos = index - 2;
 					endpos = index + 2;
+					position = leaderboardList.indexOf(entry) - 2 + 1; // full LeaderBoard
 				}
 
-				int position = leaderboardList.indexOf(entry) - 2 + 1; // real
-				//int position = 1 ; ; // smaller Boarder
-				// position
+				
+				// position = 1 ; ; // smaller LeaderBoard
+			
 				for (Map.Entry<String, Integer> ent : leaderboardList.subList(startpos, endpos+1)) {
 					scopeList.add(new anagram.Entry(ent.getKey(), ent.getValue(), position));
 					position++;
 				}
 			}
 		}
-		System.out.println("Leader Board:"+ leaderboardList+"\n");
+		System.out.println("\nLeader Board:"+ leaderboardList);
 		return scopeList;
 	}
 }

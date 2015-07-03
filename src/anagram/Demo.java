@@ -6,16 +6,31 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+/**
+ * The Class Demo.
+ */
 public class Demo {
-
+	
+	/** The game. */
 	private static Game game = new Game();
 	
+	/** The data boolean. */
+	private static boolean dataBoolean = false;
+	
+	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		generateData();
 		TestRunner();
-
 	}
 
+	/**
+	 * Generate data.
+	 */
 	public static void generateData(){
 		try{
 			// Null Situation
@@ -33,13 +48,21 @@ public class Demo {
 			game.submitScore("catarina", game.calculateScore("nitormo","monitor")); // score 8 + 7 = 15
 			game.submitScore("catarina", game.calculateScore("semoo","mouse")); // score 15 + 0 = 15
 			game.submitScore("omniata", game.calculateScore("atda","data")); // score 7+4 = 11
+			
 			List<anagram.Entry> list = game.getLeaderBoard("jane");
+			System.out.println("jane");
 			PrintLeaderBoard(list);
-			list = game.getLeaderBoard("mary");
+			list = game.getLeaderBoard("catarina");
+			System.out.println("catarina");
 			PrintLeaderBoard(list);
 			list = game.getLeaderBoard("sophia");
+			System.out.println("sophia");
 			PrintLeaderBoard(list);
-
+			list = game.getLeaderBoard("john");
+			System.out.println("john");
+			PrintLeaderBoard(list);
+			
+			dataBoolean = true;
 		}catch(NullPointerException e1){
 			e1.printStackTrace();
 		}catch(Exception e2){
@@ -47,6 +70,9 @@ public class Demo {
 		}
 	}
 
+	/**
+	 * Test runner.
+	 */
 	public static void TestRunner(){
 		Result result = JUnitCore.runClasses(AnagramTest.class); 
 		for (Failure failure : result.getFailures()) {
@@ -55,17 +81,37 @@ public class Demo {
 		System.out.println(result.wasSuccessful());
 	}
 	
+	/**
+	 * Prints the leader board.
+	 *
+	 * @param list the list
+	 */
 	public static void PrintLeaderBoard(List<anagram.Entry> list){
 		
 		System.out.println("Position\tUID\t\tScore\t");
 		System.out.println("======================================");
 		for(anagram.Entry entry : list){
-			System.out.println(" "+ entry.getPositon() + " \t\t" +entry.getUid()  + "\t\t " + entry.getScore());
+			System.out.println(" "+ entry.getPosition() + " \t\t" +entry.getUid()  + "\t\t " + entry.getScore());
 		}
 
 	}
 	
+	/**
+	 * Gets the game.
+	 *
+	 * @return the game
+	 */
 	public Game getGame(){
 			return game;
 	}
+	
+	/**
+	 * Gets the data boolean.
+	 *
+	 * @return the data boolean
+	 */
+	public boolean getDataBoolean(){
+		return dataBoolean;
+	}
+	
 }
