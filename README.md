@@ -1,7 +1,7 @@
 # Anagram
 
 Anagram is a word play game. 
-The main goal is to rearange the letters of a random given word in order to produce a new word, an anagram.
+The main goal is to rearange the letters of a given random word in order to produce a new word, an anagram.
 
 ## Dependencies 
 
