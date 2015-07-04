@@ -10,9 +10,9 @@ The main goal is to rearange the letters of a random given word in order to prod
 
 ## Build
 
-Compile and run the Demo.class in the package anagram under the src folder
-[](https://github.com/catarinamoura/anagram/blob/master/src/anagram/Demo.java)
-The Demo.class load some entries and run the test cases 
+Compile and run the [class Demo](https://github.com/catarinamoura/anagram/blob/master/src/anagram/Demo.java) in the package anagram under the [src](https://github.com/catarinamoura/anagram/tree/master/src) folder
+
+The Demo.java loads some entries and run test cases.
 
 
 
