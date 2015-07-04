@@ -99,54 +99,35 @@ public class Game {
 
 				int index = leaderboardList.indexOf(entry);
 				int size = leaderboardList.size();
-				int startpos; 
-				int endpos;
-				int position;  // position of uid in the full leader board 
-				
-				if (index == 0 || index == 1 || index == size - 2 || index == size - 1) {
-					// exceptional cases, the uid is in the first, second,
-					// second last or last position
+				int startpos = 0; 
+				int endpos = 0;
+				int position = 1;  // position of uid in the full leader board 
 
-					if (index == 0 || index == 1) { // first, second pos
-						startpos = index;
-						position = 1 ; // full LeaderBoard 
-						if (index + 2 <= size - 1) {// display two entries down
-							endpos = index + 2;
-						} else {
-							if (index + 1 <= size - 1) {// display one entry down
-								endpos = index + 1;
-							} else { // display the entry himself
-								endpos = index;
-							}
-						}
-
-					} else { // second last and last position
-						endpos = index;
-						if (index - 2 <= size - 1) {// display two entries up
-							startpos = index - 2;
-							position = leaderboardList.indexOf(entry) - 2 + 1; // full LeaderBoard 
-						} else {
-							if (index - 1 <= size - 1) {// display 1 entry up
-								startpos = index - 1;
-								position = leaderboardList.indexOf(entry) - 1 + 1; // full LeaderBoard
-							} else {// display the entry himself
-								startpos = index;
-								position = leaderboardList.indexOf(entry) + 1; // full LeaderBoard
-							}
-						}
+				// present max 5 entries 2 top to uid + uid + 2 bellow to uid
+				for(int i=2; i>=0; i--){
+					if(index-i >= 0 && index+i < size){
+						startpos = index - i;
+						endpos = index + i;
+						position =index - i + 1;
+						break;
 					}
-
-				} else {
-					// normal case -> five entries, 2 top to uid + uid + 2
-					// bellow to uid
-					startpos = index - 2;
-					endpos = index + 2;
-					position = leaderboardList.indexOf(entry) - 2 + 1; // full LeaderBoard
+					
+					if(index+i < size){ //  shows i entries down 
+						startpos = index;
+						endpos = index+i;
+						position = index + 1 ;
+						break;
+					}
+					
+					if(index-i >= 0){ // shows i entries up 
+						startpos = index-i;
+						endpos = index;
+						position = index -i + 1 ;
+						break;
+					}
 				}
-
-				
-				// position = 1 ; ; // smaller LeaderBoard
-			
+				// position = 1 ;  // smaller LeaderBoard
+					// setting the final leaderBoard
 				for (Map.Entry<String, Integer> ent : leaderboardList.subList(startpos, endpos+1)) {
 					scopeList.add(new core.Entry(ent.getKey(), ent.getValue(), position));
 					position++;
